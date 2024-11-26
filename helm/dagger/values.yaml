@@ -85,3 +85,6 @@ magicache:
   ### If secretName is set, a new secret will NOT be created
   #
   # secretName: EXISTING_SECRET_NAME
+
+# If any additioal env vars are requried, you can create a secret and reference it here
+envFromSecretName: 

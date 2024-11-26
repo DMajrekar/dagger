@@ -54,13 +54,19 @@ spec:
           env:
           - name: _EXPERIMENTAL_DAGGER_CACHESERVICE_URL
             value: {{ required "A magicache url is required" .Values.magicache.url }}
+          {{- end }}
           envFrom:
+          {{- if (.Values.magicache.enabled) }}
           - secretRef:
               {{- if .Values.magicache.secretName }}
               name: {{ .Values.magicache.secretName }}
               {{- else }}
               name: {{ include "dagger.fullname" . }}-magicache-token
               {{- end }}
+          {{- end }}
+          {{- if .Values.envFromSecretName }}
+          - secretRef:
+              name: {{ .Values.envFromSecretName }}
           {{- end }}
           securityContext:
             privileged: true
